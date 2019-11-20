@@ -10,13 +10,11 @@ import (
 type loggerKey struct{}
 
 // New ... new logger
-func New() (*zap.Logger, error) {
+func New(env string) (*zap.Logger, error) {
+	if env == "development" {
+		return newDevelopmentConfig().Build()
+	}
 	return newProductionConfig().Build()
-}
-
-// NewDevelopment ... new development logger
-func NewDevelopment() (*zap.Logger, error) {
-	return newDevelopmentConfig().Build()
 }
 
 // Logger ... get context from context

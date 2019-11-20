@@ -36,7 +36,7 @@ func newAuthenticationServer(logger *zap.Logger, port string) *grpc.Server {
 	pb.RegisterAuthenticationServer(server, authenticationHandler)
 	reflection.Register(server)
 
-	listen, err := net.Listen("tcp", port)
+	listen, err := net.Listen("tcp", fmt.Sprintf(":%s", port))
 	if err != nil {
 		panic(err)
 	}

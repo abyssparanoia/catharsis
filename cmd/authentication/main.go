@@ -7,24 +7,26 @@ import (
 	"syscall"
 	"time"
 
+	env "github.com/caarlos0/env/v6"
 	"go.uber.org/zap"
 
 	"github.com/abyssparanoia/catharsis/pkg/log"
 )
 
-const (
-	port = ":50051"
-)
-
 func main() {
 
-	// TODO: change logger mode by env
-	logger, err := log.NewDevelopment()
+	// initilize environment variables
+	envObj := environment{}
+	if err := env.Parse(&envObj); err != nil {
+		panic(err)
+	}
+
+	logger, err := log.New(envObj.Envrionment)
 	if err != nil {
 		panic(err)
 	}
 
-	server := newAuthenticationServer(logger, port)
+	server := newAuthenticationServer(logger, envObj.Port)
 
 	c := make(chan os.Signal, 1)
 	signal.Notify(c, syscall.SIGHUP, syscall.SIGQUIT, syscall.SIGTERM, syscall.SIGINT)

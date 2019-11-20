@@ -24,20 +24,20 @@ func logger(ctx context.Context) *zap.Logger {
 
 // Debugf ... output debug log
 func Debugf(ctx context.Context, msg string, fields ...zap.Field) {
-	logger(ctx).Debug(msg, fields...)
+	logger(ctx).WithOptions(zap.AddCallerSkip(1)).Debug(msg, fields...)
 }
 
 // Infof ... output info log
 func Infof(ctx context.Context, msg string, fields ...zap.Field) {
-	logger(ctx).Info(msg, fields...)
+	logger(ctx).WithOptions(zap.AddCallerSkip(1)).Info(msg, fields...)
 }
 
 // Warningf ... output warning log
 func Warningf(ctx context.Context, msg string, fields ...zap.Field) {
-	logger(ctx).Warn(msg, fields...)
+	logger(ctx).WithOptions(zap.AddCallerSkip(1)).Warn(msg, fields...)
 }
 
 // Errorf ... output error log
 func Errorf(ctx context.Context, msg string, fields ...zap.Field) {
-	logger(ctx).Error(msg, fields...)
+	logger(ctx).WithOptions(zap.AddCallerSkip(1)).Error(msg, fields...)
 }

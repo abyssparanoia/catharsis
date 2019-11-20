@@ -3,9 +3,11 @@ package service
 import (
 	"context"
 	"errors"
-	"log"
+
+	"go.uber.org/zap"
 
 	"github.com/abyssparanoia/catharsis/authentication/domain/repository"
+	"github.com/abyssparanoia/catharsis/pkg/log"
 )
 
 type authentication struct {
@@ -16,9 +18,11 @@ func (s *authentication) SignIn(ctx context.Context, userID string, password str
 
 	user, err := s.userRepository.Get(ctx, userID)
 	if err != nil {
-		log.Fatalf("s.userRepository.Get: %s", err)
+		log.Errorf(ctx, "s.userRepository.Get: %s", zap.Error(err))
 		return accessToken, refreshToken, err
 	}
+
+	log.Debugf(ctx, user.ID)
 
 	// TODO(abyssparanoia): hash check
 	if user.Password != password {

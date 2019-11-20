@@ -19,5 +19,5 @@ the boilerplate for monorepo application
 ### sign in grpcurl sample
 
 ```bash
-grpcurl -plaintext -d '{"user_id": "tester", "password":"hogehoge"}' 127.0.0.1:50051 Authentication/SignIn
+grpcurl -plaintext -d '{"user_id": "user_id", "password":"password"}' 127.0.0.1:50051 Authentication/SignIn
 ```

@@ -2,11 +2,14 @@ package main
 
 import (
 	"context"
-	"log"
 	"os"
 	"os/signal"
 	"syscall"
 	"time"
+
+	"go.uber.org/zap"
+
+	"github.com/abyssparanoia/catharsis/pkg/log"
 )
 
 const (
@@ -15,13 +18,19 @@ const (
 
 func main() {
 
-	server := newAuthenticationServer(port)
+	// TODO: change logger mode by env
+	logger, err := log.NewDevelopment()
+	if err != nil {
+		panic(err)
+	}
+
+	server := newAuthenticationServer(logger, port)
 
 	c := make(chan os.Signal, 1)
 	signal.Notify(c, syscall.SIGHUP, syscall.SIGQUIT, syscall.SIGTERM, syscall.SIGINT)
 
 	for s := range c {
-		log.Printf("Signal %s recieved\n", s.String())
+		logger.Info("Signal recieved", zap.String("signal", s.String()))
 
 		switch s {
 		case syscall.SIGQUIT, syscall.SIGTERM, syscall.SIGINT:
@@ -37,15 +46,15 @@ func main() {
 
 			select {
 			case <-shutdown:
-				log.Println("Gracefully stop")
+				logger.Info("Gracefully stop")
 			case <-ctx.Done():
-				log.Println("Force stop")
+				logger.Info("Force stop")
 				server.Stop()
 			}
 
 			cancel()
 
-			log.Println("Exit")
+			logger.Info("Exit")
 			return
 
 		case syscall.SIGHUP:

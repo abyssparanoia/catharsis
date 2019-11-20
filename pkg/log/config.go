@@ -2,8 +2,8 @@ package log
 
 import "go.uber.org/zap"
 
-// NewDevelopmentConfig ... development config
-func NewDevelopmentConfig() zap.Config {
+// newDevelopmentConfig ... development config
+func newDevelopmentConfig() zap.Config {
 	return zap.Config{
 		Level:            zap.NewAtomicLevelAt(zap.DebugLevel),
 		Development:      true,
@@ -14,8 +14,8 @@ func NewDevelopmentConfig() zap.Config {
 	}
 }
 
-// NewProductionConfig ... production config
-func NewProductionConfig() zap.Config {
+// newProductionConfig ... production config
+func newProductionConfig() zap.Config {
 	return zap.Config{
 		Level:       zap.NewAtomicLevelAt(zap.InfoLevel),
 		Development: false,

@@ -22,11 +22,10 @@ func (s *authentication) SignIn(ctx context.Context, userID string, password str
 		return accessToken, refreshToken, err
 	}
 
-	log.Debugf(ctx, user.ID)
-
 	// TODO(abyssparanoia): hash check
 	if user.Password != password {
 		err = errors.New("invalid password")
+		log.Errorf(ctx, "invalid password", zap.Error(err))
 		return accessToken, refreshToken, err
 	}
 

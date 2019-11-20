@@ -12,12 +12,38 @@ the boilerplate for monorepo application
 
 ### authentication server
 
+#### local
+
 ```bash
-> go run ./cmd/authentication/main,go
+> realize start
 ```
 
-### sign in grpcurl sample
+#### docker
+
+```bash
+# build image
+> docker-compose build
+
+# container start
+> docker-compose up -d
+```
+
+#### sign in grpcurl sample
 
 ```bash
 grpcurl -plaintext -d '{"user_id": "user_id", "password":"password"}' 127.0.0.1:50051 Authentication/SignIn
+```
+
+## production
+
+### build
+
+```bash
+> docker build -f ./docker/production/authentication/Dockerfile .
+```
+
+### start
+
+```bash
+> docker container run -it 4069a0d5dfac -p 50051:50051
 ```

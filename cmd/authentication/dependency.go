@@ -9,6 +9,7 @@ import (
 	"github.com/abyssparanoia/catharsis/authentication/service"
 	pb "github.com/abyssparanoia/catharsis/proto/authentication"
 	"google.golang.org/grpc"
+	"google.golang.org/grpc/reflection"
 )
 
 func newAuthenticationServer(port string) *grpc.Server {
@@ -22,6 +23,7 @@ func newAuthenticationServer(port string) *grpc.Server {
 	server := grpc.NewServer()
 
 	pb.RegisterAuthenticationServer(server, authenticationHandler)
+	reflection.Register(server)
 
 	listen, err := net.Listen("tcp", port)
 	if err != nil {

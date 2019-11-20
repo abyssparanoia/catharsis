@@ -3,34 +3,56 @@ package main
 import (
 	"context"
 	"log"
-	"net"
-
-	pb "github.com/abyssparanoia/catharsis/proto/authentication"
-	"google.golang.org/grpc"
-	"google.golang.org/grpc/reflection"
+	"os"
+	"os/signal"
+	"syscall"
+	"time"
 )
 
 const (
 	port = ":50051"
 )
 
-type server struct{}
-
-func (s *server) SignIn(ctx context.Context, req *pb.SignInMessageRequest) (*pb.SignInMessageResponse, error) {
-	log.Printf("Received: %v", req.UserId)
-	return &pb.SignInMessageResponse{AccessToken: "access_token", RefreshToken: "refresh_token"}, nil
-}
-
 func main() {
-	lis, err := net.Listen("tcp", port)
-	if err != nil {
-		log.Fatalf("failed to listen: %v", err)
+
+	server := newAuthenticationServer(port)
+
+	c := make(chan os.Signal, 1)
+	signal.Notify(c, syscall.SIGHUP, syscall.SIGQUIT, syscall.SIGTERM, syscall.SIGINT)
+
+	for s := range c {
+		log.Printf("Signal %s recieved\n", s.String())
+
+		switch s {
+		case syscall.SIGQUIT, syscall.SIGTERM, syscall.SIGINT:
+			ctx, cancel := context.WithTimeout(context.Background(), 30*time.Second)
+			shutdown := make(chan bool, 1)
+
+			go func() {
+
+				server.GracefulStop()
+
+				shutdown <- true
+			}()
+
+			select {
+			case <-shutdown:
+				log.Println("Gracefully stop")
+			case <-ctx.Done():
+				log.Println("Force stop")
+				server.Stop()
+			}
+
+			cancel()
+
+			log.Println("Exit")
+			return
+
+		case syscall.SIGHUP:
+		default:
+			return
+
+		}
 	}
 
-	s := grpc.NewServer()
-	pb.RegisterAuthenticationServer(s, &server{})
-	reflection.Register(s)
-	if err := s.Serve(lis); err != nil {
-		log.Fatalf("failed to serve: %v", err)
-	}
 }

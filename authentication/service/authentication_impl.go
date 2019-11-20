@@ -8,6 +8,8 @@ import (
 
 	"github.com/abyssparanoia/catharsis/authentication/domain/repository"
 	"github.com/abyssparanoia/catharsis/pkg/log"
+	"google.golang.org/grpc/codes"
+	"google.golang.org/grpc/status"
 )
 
 type authentication struct {
@@ -19,14 +21,14 @@ func (s *authentication) SignIn(ctx context.Context, userID string, password str
 	user, err := s.userRepository.Get(ctx, userID)
 	if err != nil {
 		log.Errorf(ctx, "s.userRepository.Get: %s", zap.Error(err))
-		return accessToken, refreshToken, err
+		return accessToken, refreshToken, status.Errorf(codes.Internal, "s.userRepository.Get:%s", err)
 	}
 
 	// TODO(abyssparanoia): hash check
 	if user.Password != password {
 		err = errors.New("invalid password")
 		log.Errorf(ctx, "invalid password", zap.Error(err))
-		return accessToken, refreshToken, err
+		return accessToken, refreshToken, status.Errorf(codes.Internal, "invalid password")
 	}
 
 	// TODO: generate token by usign jwt-go

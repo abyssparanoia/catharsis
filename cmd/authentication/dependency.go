@@ -10,11 +10,20 @@ import (
 	pb "github.com/abyssparanoia/catharsis/proto/authentication"
 	grpc_middleware "github.com/grpc-ecosystem/go-grpc-middleware"
 	grpc_zap "github.com/grpc-ecosystem/go-grpc-middleware/logging/zap"
+	grpc_recovery "github.com/grpc-ecosystem/go-grpc-middleware/recovery"
 	grpc_ctxtags "github.com/grpc-ecosystem/go-grpc-middleware/tags"
 	"go.uber.org/zap"
 	"google.golang.org/grpc"
+	"google.golang.org/grpc/codes"
 	"google.golang.org/grpc/reflection"
 )
+
+func recoveryFuncFactory(logger *zap.Logger) func(p interface{}) error {
+	return func(p interface{}) error {
+		logger.Error(fmt.Sprintf("p: %+v\n", p))
+		return grpc.Errorf(codes.Internal, "Unexpected error")
+	}
+}
 
 func newAuthenticationServer(logger *zap.Logger, port string) *grpc.Server {
 
@@ -26,10 +35,15 @@ func newAuthenticationServer(logger *zap.Logger, port string) *grpc.Server {
 
 	authenticationHandler := handler.NewAuthenticationHandler(authenticationService)
 
+	opts := []grpc_recovery.Option{
+		grpc_recovery.WithRecoveryHandler(recoveryFuncFactory(logger)),
+	}
+
 	server := grpc.NewServer(
 		grpc_middleware.WithUnaryServerChain(
 			grpc_ctxtags.UnaryServerInterceptor(grpc_ctxtags.WithFieldExtractor(grpc_ctxtags.CodeGenRequestFieldExtractor)),
 			grpc_zap.UnaryServerInterceptor(logger),
+			grpc_recovery.UnaryServerInterceptor(opts...),
 		),
 	)
 

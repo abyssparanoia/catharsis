@@ -1,0 +1,12 @@
+syntax = "proto3";
+service Authentication {
+  rpc SignIn(SignInMessageRequest) returns (SignInMessageResponse) {}
+}
+message SignInMessageRequest {
+  string user_id = 1;
+  string password = 2;
+}
+message SignInMessageResponse {
+  string access_token = 1;
+  string refresh_token = 2;
+}

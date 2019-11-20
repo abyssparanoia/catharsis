@@ -29,6 +29,6 @@ func (h *AuthenticationHandler) SignIn(ctx context.Context, req *pb.SignInMessag
 }
 
 // NewAuthenticationHandler ... get authentication handler
-func NewAuthenticationHandler(authenticationServive service.Authentication) *AuthenticationHandler {
+func NewAuthenticationHandler(authenticationServive service.Authentication) pb.AuthenticationServer {
 	return &AuthenticationHandler{authenticationServive}
 }

@@ -1,0 +1,25 @@
+settings:
+  legacy:
+    force: false
+    interval: 0s
+schema:
+  - name: authentication-server
+    path: .
+    commands:
+      install:
+        status: true
+        method: go build -o ./cmd/authentication/authentication-server ./cmd/authentication/
+      run:
+        status: true
+        method: ./cmd/authentication/authentication-server
+      fmt:
+        status: true
+    watcher:
+      extensions:
+        - go
+      paths:
+        - /
+      ignored_paths:
+        - .git
+        - .realize
+        - vendor

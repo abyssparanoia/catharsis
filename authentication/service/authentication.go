@@ -2,7 +2,7 @@ package service
 
 import "context"
 
-// User ... user service interface
-type User interface {
+// Authentication ... authentication service interface
+type Authentication interface {
 	SignIn(ctx context.Context, userID string, password string) (string, string, error)
 }

@@ -20,11 +20,13 @@ func (s *authentication) SignIn(ctx context.Context, userID string, password str
 		return accessToken, refreshToken, err
 	}
 
+	// TODO(abyssparanoia): hash check
 	if user.Password != password {
 		err = errors.New("invalid password")
 		return accessToken, refreshToken, err
 	}
 
+	// TODO: generate token by usign jwt-go
 	accessToken = "access_token"
 	refreshToken = "refresh_token"
 

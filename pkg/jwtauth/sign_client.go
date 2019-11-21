@@ -23,4 +23,6 @@ func NewClient(signKeyPath string) *SignClient {
 	if err != nil {
 		panic(err)
 	}
+
+	return &SignClient{signKey}
 }

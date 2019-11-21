@@ -8,7 +8,7 @@ import (
 
 	"github.com/abyssparanoia/catharsis/authentication/handler"
 	"github.com/abyssparanoia/catharsis/authentication/infrastructure/repository"
-	"github.com/abyssparanoia/catharsis/authentication/service"
+	"github.com/abyssparanoia/catharsis/authentication/infrastructure/service"
 	pb "github.com/abyssparanoia/catharsis/proto/authentication"
 	grpc_middleware "github.com/grpc-ecosystem/go-grpc-middleware"
 	grpc_zap "github.com/grpc-ecosystem/go-grpc-middleware/logging/zap"

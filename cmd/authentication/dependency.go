@@ -4,6 +4,8 @@ import (
 	"fmt"
 	"net"
 
+	"github.com/abyssparanoia/catharsis/pkg/jwtauth"
+
 	"github.com/abyssparanoia/catharsis/authentication/handler"
 	"github.com/abyssparanoia/catharsis/authentication/infrastructure/repository"
 	"github.com/abyssparanoia/catharsis/authentication/service"
@@ -25,13 +27,17 @@ func recoveryFuncFactory(logger *zap.Logger) func(p interface{}) error {
 	}
 }
 
-func newAuthenticationServer(logger *zap.Logger, port string) *grpc.Server {
+func newAuthenticationServer(logger *zap.Logger, env *environment) *grpc.Server {
 
 	grpc_zap.ReplaceGrpcLoggerV2(logger)
 
+	jwtSignClient := jwtauth.NewSignClient(env.SignKeyPath)
+
 	userRepository := repository.NewUserMock()
 
-	authenticationService := service.NewAuthentication(userRepository)
+	jwtSignService := jwtauth.NewSignService(jwtSignClient)
+
+	authenticationService := service.NewAuthentication(userRepository, jwtSignService)
 
 	authenticationHandler := handler.NewAuthenticationHandler(authenticationService)
 
@@ -50,13 +56,13 @@ func newAuthenticationServer(logger *zap.Logger, port string) *grpc.Server {
 	pb.RegisterAuthenticationServer(server, authenticationHandler)
 	reflection.Register(server)
 
-	listen, err := net.Listen("tcp", fmt.Sprintf(":%s", port))
+	listen, err := net.Listen("tcp", fmt.Sprintf(":%s", env.Port))
 	if err != nil {
 		panic(err)
 	}
 
 	go func() {
-		logger.Info(fmt.Sprintf("Listening grpc on %s:%s", "localhost", port))
+		logger.Info(fmt.Sprintf("Listening grpc on %s:%s", "localhost", env.Port))
 		if err := server.Serve(listen); err != nil {
 			logger.Error("server.Serve", zap.Error(err))
 		}

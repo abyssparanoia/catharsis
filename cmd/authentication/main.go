@@ -16,8 +16,8 @@ import (
 func main() {
 
 	// initilize environment variables
-	envObj := environment{}
-	if err := env.Parse(&envObj); err != nil {
+	envObj := &environment{}
+	if err := env.Parse(envObj); err != nil {
 		panic(err)
 	}
 
@@ -26,7 +26,7 @@ func main() {
 		panic(err)
 	}
 
-	server := newAuthenticationServer(logger, envObj.Port)
+	server := newAuthenticationServer(logger, envObj)
 
 	c := make(chan os.Signal, 1)
 	signal.Notify(c, syscall.SIGHUP, syscall.SIGQUIT, syscall.SIGTERM, syscall.SIGINT)

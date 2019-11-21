@@ -12,8 +12,8 @@ type SignClient struct {
 	signKey *rsa.PrivateKey
 }
 
-// NewClient ... get sign client
-func NewClient(signKeyPath string) *SignClient {
+// NewSignClient ... get sign client
+func NewSignClient(signKeyPath string) *SignClient {
 	signBytes, err := ioutil.ReadFile(signKeyPath)
 	if err != nil {
 		panic(err)

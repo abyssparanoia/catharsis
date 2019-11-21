@@ -12,7 +12,7 @@ type Claims struct {
 	jwt.StandardClaims
 }
 
-func (c *Claims) set(userID string) {
+func (c *Claims) Set(userID string) {
 	c.UserID = userID
 	c.ExpiresAt = time.Now().Add(time.Hour * tokenExpiredHours).Unix()
 }

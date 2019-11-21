@@ -10,6 +10,21 @@ the boilerplate for monorepo application
 
 ## development
 
+### Preparation
+
+- generate rsa pem file
+
+```bash
+> openssl genrsa -out ./secret/catharsis.rsa 1024
+> openssl rsa -in ./secret/catharsis.rsa  -pubout > ./secret/catharsis.rsa.pub
+```
+
+- environment (using direnv)
+
+```bash
+> cp .envrc.tmpl .envrc
+```
+
 ### authentication server
 
 #### local

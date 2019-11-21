@@ -1,6 +1,10 @@
 package jwtauth
 
-import jwt "github.com/dgrijalva/jwt-go"
+import (
+	"time"
+
+	jwt "github.com/dgrijalva/jwt-go"
+)
 
 // Claims ... claims model
 type Claims struct {
@@ -8,7 +12,7 @@ type Claims struct {
 	jwt.StandardClaims
 }
 
-func (c *Claims) set(jc jwt.Claims) {
-	mc := jc.(jwt.MapClaims)
-	c.UserID = mc["UserID"].(string)
+func (c *Claims) set(userID string) {
+	c.UserID = userID
+	c.ExpiresAt = time.Now().Add(time.Hour * tokenExpiredHours).Unix()
 }

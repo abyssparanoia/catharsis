@@ -3,8 +3,8 @@ package jwtauth
 type contextKey string
 
 const (
-	// TokenExpiredDays ... expired days
-	tokenExpiredDays = 7
+	// TokenExpiredHours ... expired hours
+	tokenExpiredHours = 1
 
 	// claimsContextKey ... jwt claim key
 	claimsContextKey contextKey = "jwtauth:claims"

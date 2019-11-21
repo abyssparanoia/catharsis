@@ -37,14 +37,11 @@ func (s *authentication) SignIn(ctx context.Context, userID string, password str
 	claims := &jwtauth.Claims{}
 	claims.Set(userID)
 
-	accessToken, err = s.jwtSignSvc.GenerateAccessToken(ctx, claims)
+	accessToken, refreshToken, err = s.jwtSignSvc.GenerateToken(ctx, claims)
 	if err != nil {
-		log.Errorf(ctx, "s.jwtSignSvc.GenerateAccessToken: %s", zap.Error(err))
-		return accessToken, refreshToken, status.Errorf(codes.Internal, "s.jwtSignSvc.GenerateAccessToken:%s", err)
+		log.Errorf(ctx, "s.jwtSignSvc.GenerateToken: %s", zap.Error(err))
+		return accessToken, refreshToken, status.Errorf(codes.Internal, "s.jwtSignSvc.GenerateToken:%s", err)
 	}
-
-	// TODO: generate token by usign jwt-go
-	refreshToken = "refresh_token"
 
 	return accessToken, refreshToken, nil
 }

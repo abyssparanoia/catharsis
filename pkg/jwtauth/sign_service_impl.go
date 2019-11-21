@@ -2,6 +2,7 @@ package jwtauth
 
 import (
 	"context"
+	"time"
 
 	"github.com/abyssparanoia/catharsis/pkg/log"
 	jwt "github.com/dgrijalva/jwt-go"
@@ -12,17 +13,27 @@ type signService struct {
 	jwtSignCli *SignClient
 }
 
-func (s *signService) GenerateAccessToken(ctx context.Context, claims *Claims) (string, error) {
+func (s *signService) GenerateToken(ctx context.Context, claims *Claims) (string, string, error) {
 
-	token := jwt.NewWithClaims(jwt.SigningMethodRS256, claims)
+	accessToken := jwt.NewWithClaims(jwt.SigningMethodRS256, claims)
 
-	tokenString, err := token.SignedString(s.jwtSignCli.signKey)
+	accessTokenString, err := accessToken.SignedString(s.jwtSignCli.signKey)
 	if err != nil {
-		log.Errorf(ctx, "token.SignedString: ", zap.Error(err))
-		return "", err
+		log.Errorf(ctx, "accessToken.SignedString: ", zap.Error(err))
+		return "", "", err
 	}
 
-	return tokenString, nil
+	refreshToken := jwt.New(jwt.SigningMethodRS256)
+	rtClaims := refreshToken.Claims.(jwt.MapClaims)
+	rtClaims["sub"] = 1
+	rtClaims["exp"] = time.Now().Add(time.Hour * refreshTokenExpiredHours).Unix()
+
+	refreshTokenString, err := refreshToken.SignedString(s.jwtSignCli.signKey)
+	if err != nil {
+		log.Errorf(ctx, "refreshToken.SignedString: ", zap.Error(err))
+	}
+
+	return accessTokenString, refreshTokenString, nil
 }
 
 // NewSignService ... get new sign service

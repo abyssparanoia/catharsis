@@ -15,5 +15,5 @@ type Claims struct {
 // Set ... set claims
 func (c *Claims) Set(userID string) {
 	c.UserID = userID
-	c.ExpiresAt = time.Now().Add(time.Hour * tokenExpiredHours).Unix()
+	c.ExpiresAt = time.Now().Add(time.Hour * accessTokenExpiredHours).Unix()
 }

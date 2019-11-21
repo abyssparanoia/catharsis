@@ -12,7 +12,7 @@ type verifyService struct {
 	jwtVerifyClient *VerifyClient
 }
 
-func (s *verifyService) Authenticate(ctx context.Context, token string) (*Claims, error) {
+func (s *verifyService) Validate(ctx context.Context, token string) (*Claims, error) {
 
 	parser := new(jwt.Parser)
 

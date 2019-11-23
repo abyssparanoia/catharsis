@@ -15,6 +15,8 @@ type signService struct {
 
 func (s *signService) GenerateToken(ctx context.Context, claims *Claims) (string, string, error) {
 
+	claims.ExpiresAt = time.Now().Add(time.Hour * accessTokenExpiredHours).Unix()
+
 	accessToken := jwt.NewWithClaims(jwt.SigningMethodRS256, claims)
 
 	accessTokenString, err := accessToken.SignedString(s.jwtSignCli.signKey)

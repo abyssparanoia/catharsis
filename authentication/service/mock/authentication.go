@@ -6,8 +6,9 @@ package mock_service
 
 import (
 	context "context"
-	gomock "github.com/golang/mock/gomock"
 	reflect "reflect"
+
+	gomock "github.com/golang/mock/gomock"
 )
 
 // MockAuthentication is a mock of Authentication interface

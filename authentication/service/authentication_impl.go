@@ -9,7 +9,6 @@ import (
 	"go.uber.org/zap"
 
 	"github.com/abyssparanoia/catharsis/authentication/domain/repository"
-	"github.com/abyssparanoia/catharsis/authentication/domain/service"
 	"github.com/abyssparanoia/catharsis/pkg/log"
 	"google.golang.org/grpc/codes"
 	"google.golang.org/grpc/status"
@@ -48,6 +47,6 @@ func (s *authentication) SignIn(ctx context.Context, userID string, password str
 }
 
 // NewAuthentication ... get authentication service
-func NewAuthentication(userRepository repository.User, jwtSignSvc jwtauth.SignService) service.Authentication {
+func NewAuthentication(userRepository repository.User, jwtSignSvc jwtauth.SignService) Authentication {
 	return &authentication{userRepository, jwtSignSvc}
 }

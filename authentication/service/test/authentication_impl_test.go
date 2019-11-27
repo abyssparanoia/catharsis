@@ -9,8 +9,8 @@ import (
 
 	"github.com/abyssparanoia/catharsis/authentication/domain/model"
 	mock_repository "github.com/abyssparanoia/catharsis/authentication/domain/repository/mock"
+	"github.com/abyssparanoia/catharsis/authentication/service"
 
-	"github.com/abyssparanoia/catharsis/authentication/infrastructure/service"
 	"github.com/abyssparanoia/catharsis/pkg/jwtauth"
 	mock_jwt_auth "github.com/abyssparanoia/catharsis/pkg/jwtauth/mock"
 )

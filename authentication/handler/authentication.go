@@ -3,11 +3,10 @@ package handler
 import (
 	"context"
 
+	"github.com/abyssparanoia/catharsis/authentication/service"
 	"github.com/abyssparanoia/catharsis/pkg/log"
 	pb "github.com/abyssparanoia/catharsis/proto/authentication"
 	"go.uber.org/zap"
-
-	"github.com/abyssparanoia/catharsis/authentication/domain/service"
 )
 
 // AuthenticationHandler ... authentication handler struct

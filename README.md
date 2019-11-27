@@ -75,14 +75,10 @@ grpcurl -plaintext -d '{"user_id": "user_id", "password":"password"}' 127.0.0.1:
 │   ├── domain
 │   │   ├── model
 │   │   │   └── user.go
-│   │   ├── repository
-│   │   │   ├── mock
-│   │   │   │   └── user.go
-│   │   │   └── user.go
-│   │   └── service
-│   │       ├── authentication.go
-│   │       └── mock
-│   │           └── authentication.go
+│   │   └── repository
+│   │       ├── mock
+│   │       │   └── user.go
+│   │       └── user.go
 │   ├── handler
 │   │   └── authentication.go
 │   ├── infrastructure
@@ -90,14 +86,17 @@ grpcurl -plaintext -d '{"user_id": "user_id", "password":"password"}' 127.0.0.1:
 │   │   │   └── entity
 │   │   │       ├── base.go
 │   │   │       └── user.go
-│   │   ├── repository
-│   │   │   └── user_mock.go
-│   │   └── service
-│   │       ├── authentication_impl.go
-│   │       └── test
-│   │           └── authentication_impl_test.go
-│   └── intercepter
-│       └── authentication.go
+│   │   └── repository
+│   │       └── user_mock.go
+│   ├── intercepter
+│   │   └── authentication.go
+│   └── service
+│       ├── authentication.go
+│       ├── authentication_impl.go
+│       ├── mock
+│       │   └── authentication.go
+│       └── test
+│           └── authentication_impl_test.go
 ├── cmd
 │   ├── README.md
 │   └── authentication
@@ -112,6 +111,8 @@ grpcurl -plaintext -d '{"user_id": "user_id", "password":"password"}' 127.0.0.1:
 │       └── authentication
 │           └── Dockerfile
 ├── docker-compose.yml
+├── docs
+│   └── architecture.jp.md
 ├── go.mod
 ├── go.sum
 ├── pkg
@@ -139,4 +140,5 @@ grpcurl -plaintext -d '{"user_id": "user_id", "password":"password"}' 127.0.0.1:
 └── secret
     ├── catharsis.rsa
     └── catharsis.rsa.pub
+
 ```

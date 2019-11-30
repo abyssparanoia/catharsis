@@ -14,7 +14,7 @@ type dependency struct {
 
 func (d *dependency) Inject(e *environment) {
 
-	authenticationConn, err := grpc.Dial(e.AuthenticationURL)
+	authenticationConn, err := grpc.Dial(e.AuthenticationURL, grpc.WithInsecure())
 	if err != nil {
 		panic(err)
 	}

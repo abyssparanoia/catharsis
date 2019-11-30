@@ -5,6 +5,7 @@ go 1.12
 require (
 	github.com/caarlos0/env/v6 v6.1.0
 	github.com/dgrijalva/jwt-go v3.2.0+incompatible
+	github.com/go-chi/chi v4.0.2+incompatible
 	github.com/golang/mock v1.3.1
 	github.com/golang/protobuf v1.3.2
 	github.com/grpc-ecosystem/go-grpc-middleware v1.1.0

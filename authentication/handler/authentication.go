@@ -5,7 +5,7 @@ import (
 
 	"github.com/abyssparanoia/catharsis/authentication/service"
 	"github.com/abyssparanoia/catharsis/pkg/log"
-	pb "github.com/abyssparanoia/catharsis/proto/authentication"
+	pb "github.com/abyssparanoia/catharsis/proto"
 	"go.uber.org/zap"
 )
 

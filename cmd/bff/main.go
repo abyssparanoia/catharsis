@@ -9,6 +9,7 @@ import (
 	"time"
 
 	"github.com/abyssparanoia/catharsis/pkg/log"
+	"github.com/grpc-ecosystem/go-grpc-middleware/logging/zap/ctxzap"
 
 	"net/http"
 
@@ -35,10 +36,12 @@ func main() {
 	r := chi.NewRouter()
 	routing(r, d)
 
+	baseCtx := ctxzap.ToContext(context.Background(), logger)
+
 	//server
 	server := http.Server{
 		Addr:    fmt.Sprintf(":%s", envObj.Port),
-		Handler: r,
+		Handler: chi.ServerBaseContext(baseCtx, r),
 	}
 
 	logger.Info(fmt.Sprintf("[START] server. port: %s\n", envObj.Port))

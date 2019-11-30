@@ -12,13 +12,13 @@ import (
 	"github.com/abyssparanoia/catharsis/pkg/parameter"
 )
 
-// AuthenticationHandler ... authentication handler struct
-type AuthenticationHandler struct {
+// Authentication ... authentication handler struct
+type Authentication struct {
 	authenticationService service.Authentication
 }
 
 // SignIn ... sign in handler
-func (h *AuthenticationHandler) SignIn(w http.ResponseWriter, r *http.Request) {
+func (h *Authentication) SignIn(w http.ResponseWriter, r *http.Request) {
 
 	ctx := r.Context()
 
@@ -54,4 +54,9 @@ func (h *AuthenticationHandler) SignIn(w http.ResponseWriter, r *http.Request) {
 		AccessToken:  accessToken,
 		RefreshToken: refreshToken,
 	})
+}
+
+// NewAuthentication ... get authentication handler
+func NewAuthentication(authenticationService service.Authentication) *Authentication {
+	return &Authentication{authenticationService}
 }

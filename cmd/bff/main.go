@@ -37,7 +37,7 @@ func main() {
 
 	//server
 	server := http.Server{
-		Addr:    envObj.Port,
+		Addr:    fmt.Sprintf(":%s", envObj.Port),
 		Handler: r,
 	}
 

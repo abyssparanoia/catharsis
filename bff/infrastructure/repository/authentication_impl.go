@@ -19,7 +19,7 @@ func (r *authentication) SignIn(ctx context.Context, userID string, password str
 	res, err := r.authenticationClient.SignIn(ctx, message)
 	if err != nil {
 		log.Errorf(ctx, "r.authenticationClient.SignIn", zap.Error(err))
-		return "", "", nil
+		return "", "", err
 	}
 
 	return res.AccessToken, res.RefreshToken, nil

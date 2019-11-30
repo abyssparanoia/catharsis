@@ -23,3 +23,23 @@ schema:
         - .git
         - .realize
         - vendor
+  - name: bff-server
+    path: .
+    commands:
+      install:
+        status: true
+        method: go build -o ./cmd/bff/bff-server ./cmd/bff
+      run:
+        status: true
+        method: ./cmd/bff/bff-server
+      fmt:
+        status: true
+    watcher:
+      extensions:
+        - go
+      paths:
+        - /
+      ignored_paths:
+        - .git
+        - .realize
+        - vendor

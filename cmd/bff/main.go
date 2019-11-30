@@ -41,7 +41,7 @@ func main() {
 		Handler: r,
 	}
 
-	logger.Error(fmt.Sprintf("[START] server. port: %s\n", envObj.Port))
+	logger.Info(fmt.Sprintf("[START] server. port: %s\n", envObj.Port))
 
 	go func() {
 		if err := server.ListenAndServe(); err != http.ErrServerClosed {

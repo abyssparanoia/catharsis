@@ -10,7 +10,9 @@ require (
 	github.com/grpc-ecosystem/go-grpc-middleware v1.1.0
 	github.com/rs/zerolog v1.17.2
 	github.com/stretchr/testify v1.4.0
+	github.com/unrolled/render v1.0.1
 	go.uber.org/zap v1.13.0
+	golang.org/x/text v0.3.2
 	google.golang.org/appengine v1.6.5
 	google.golang.org/grpc v1.25.1
 	gopkg.in/go-playground/assert.v1 v1.2.1

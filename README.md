@@ -25,15 +25,15 @@ the boilerplate for monorepo application
 > cp .envrc.tmpl .envrc
 ```
 
-### authentication server
+### server starting
 
-#### local
+- local
 
 ```bash
 > realize start
 ```
 
-#### docker
+- docker
 
 ```bash
 # build image
@@ -43,10 +43,16 @@ the boilerplate for monorepo application
 > docker-compose up -d
 ```
 
-#### sign in grpcurl sample
+- sign in grpcurl sample
 
 ```bash
-grpcurl -plaintext -d '{"user_id": "user_id", "password":"password"}' 127.0.0.1:50051 Authentication/SignIn
+> grpcurl -plaintext -d '{"user_id": "user_id", "password":"password"}' 127.0.0.1:50051 Authentication/SignIn
+```
+
+- example of bff server
+
+```bash
+> curl --request POST 'http://localhost:8081/v1/me/sign_in' -d '{"user_id": "user_id", "password":"password"}'
 ```
 
 ## production
@@ -97,13 +103,35 @@ grpcurl -plaintext -d '{"user_id": "user_id", "password":"password"}' 127.0.0.1:
 │       │   └── authentication.go
 │       └── test
 │           └── authentication_impl_test.go
+├── bff
+│   ├── domain
+│   │   ├── model
+│   │   └── repository
+│   │       └── authentication.go
+│   ├── handler
+│   │   ├── authentication.go
+│   │   └── ping.go
+│   ├── infrastructure
+│   │   └── repository
+│   │       └── authentication_impl.go
+│   ├── middleware
+│   │   └── access_control.go
+│   └── service
+│       ├── authentication.go
+│       └── authentication_impl.go
 ├── cmd
 │   ├── README.md
-│   └── authentication
-│       ├── authentication-server
+│   ├── authentication
+│   │   ├── authentication-server
+│   │   ├── dependency.go
+│   │   ├── env.go
+│   │   └── main.go
+│   └── bff
+│       ├── bff-server
 │       ├── dependency.go
 │       ├── env.go
-│       └── main.go
+│       ├── main.go
+│       └── routing.go
 ├── docker
 │   ├── development
 │   │   └── Dockerfile
@@ -112,11 +140,15 @@ grpcurl -plaintext -d '{"user_id": "user_id", "password":"password"}' 127.0.0.1:
 │           └── Dockerfile
 ├── docker-compose.yml
 ├── docs
-│   └── architecture.jp.md
 ├── go.mod
 ├── go.sum
 ├── pkg
 │   ├── README.md
+│   ├── errcode
+│   │   ├── error.go
+│   │   └── model.go
+│   ├── httpaccesslog
+│   │   └── middleware.go
 │   ├── jwtauth
 │   │   ├── config.go
 │   │   ├── context.go
@@ -130,13 +162,18 @@ grpcurl -plaintext -d '{"user_id": "user_id", "password":"password"}' 127.0.0.1:
 │   │   ├── verify_client.go
 │   │   ├── verify_service.go
 │   │   └── verify_service_impl.go
-│   └── log
-│       ├── config.go
-│       └── logger.go
+│   ├── log
+│   │   ├── config.go
+│   │   └── logger.go
+│   ├── parameter
+│   │   ├── json.go
+│   │   └── url.go
+│   └── renderer
+│       ├── handler.go
+│       └── model.go
 ├── proto
-│   └── authentication
-│       ├── authentication.pb.go
-│       └── authentication.proto
+│   ├── authentication.pb.go
+│   └── authentication.proto
 └── secret
     ├── catharsis.rsa
     └── catharsis.rsa.pub

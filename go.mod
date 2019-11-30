@@ -6,9 +6,11 @@ require (
 	github.com/caarlos0/env/v6 v6.1.0
 	github.com/dgrijalva/jwt-go v3.2.0+incompatible
 	github.com/go-chi/chi v4.0.2+incompatible
+	github.com/go-playground/universal-translator v0.17.0 // indirect
 	github.com/golang/mock v1.3.1
 	github.com/golang/protobuf v1.3.2
 	github.com/grpc-ecosystem/go-grpc-middleware v1.1.0
+	github.com/leodido/go-urn v1.2.0 // indirect
 	github.com/rs/zerolog v1.17.2
 	github.com/stretchr/testify v1.4.0
 	github.com/unrolled/render v1.0.1
@@ -17,4 +19,5 @@ require (
 	google.golang.org/appengine v1.6.5
 	google.golang.org/grpc v1.25.1
 	gopkg.in/go-playground/assert.v1 v1.2.1
+	gopkg.in/go-playground/validator.v9 v9.30.2
 )

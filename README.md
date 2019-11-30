@@ -8,6 +8,13 @@ the boilerplate for monorepo application
 
 - Base project is https://github.com/golang-standards/project-layout
 
+## Apps
+
+| Package                                           | Localhost              | Prodction         |
+| :------------------------------------------------ | :--------------------- | :---------------- |
+| **[[REST] bff](./cmd/bff)**                       | http://localhost:8081  | bff.\*            |
+| **[[gRPC] authentication](./cmd/authentication)** | http://localhost:50051 | authentication.\* |
+
 ## development
 
 ### Preparation

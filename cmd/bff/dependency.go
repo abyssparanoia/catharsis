@@ -18,7 +18,6 @@ func (d *dependency) Inject(e *environment) {
 	if err != nil {
 		panic(err)
 	}
-	defer authenticationConn.Close()
 
 	authenticationClient := pb.NewAuthenticationClient(authenticationConn)
 

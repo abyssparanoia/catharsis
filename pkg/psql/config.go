@@ -2,18 +2,20 @@ package psql
 
 // Config ... psql config
 type Config struct {
-	ConnctionName string
-	User          string
-	Password      string
-	Database      string
+	Host     string
+	Port     int
+	User     string
+	Password string
+	Database string
 }
 
 // NewConfig ... get new config
-func NewConfig(connectionName string, user string, password string, database string) *Config {
+func NewConfig(host string, port int, user string, password string, database string) *Config {
 	return &Config{
-		ConnctionName: connectionName,
-		User:          user,
-		Password:      password,
-		Database:      database,
+		Host:     host,
+		Port:     port,
+		User:     user,
+		Password: password,
+		Database: database,
 	}
 }

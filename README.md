@@ -62,6 +62,14 @@ the boilerplate for monorepo application
 > curl --request POST 'http://localhost:8081/v1/me/sign_in' -d '{"user_id": "user_id", "password":"password"}'
 ```
 
+### database
+
+- generate server code by sql boiler
+
+```bash
+> sqlboiler -c ./db/authentication/sqlboiler.toml -o ./pkg/dbmodels/authentication psql
+```
+
 ## production
 
 ### build

@@ -2,7 +2,14 @@ package model
 
 // User ... user domain model
 type User struct {
-	ID        string `json:"id"`
-	Password  string `json:"-"`
-	CreatedAt int64  `json:"created_at"`
+	ID                  string
+	Password            string
+	DisplayName         string
+	IconImagePath       string
+	BackgroundImagePath string
+	Profile             string
+	Email               string
+	CreatedAt           int64
+	UpdatedAt           int64
+	DeletedAt           int64
 }

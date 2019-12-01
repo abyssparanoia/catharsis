@@ -1,6 +1,7 @@
 syntax = "proto3";
 service Authentication {
   rpc SignIn(SignInMessageRequest) returns (SignInMessageResponse) {}
+  rpc CreateUser(CreateUserRequest) returns (CreateUserResponse) {}
 }
 message SignInMessageRequest {
   string user_id = 1;
@@ -10,3 +11,27 @@ message SignInMessageResponse {
   string access_token = 1;
   string refresh_token = 2;
 }
+
+message User {
+  string id = 1;
+  string password = 2;
+  string display_name = 3;
+  string icon_image_path = 4;
+  string background_image_path = 5;
+  string profile = 6;
+  string email = 7;
+  int64 created_at = 8;
+  int64 updated_at = 9;
+  int64 deleted_at = 10;
+}
+
+message CreateUserRequest {
+  string password = 1;
+  string display_name = 2;
+  string icon_image_path = 3;
+  string background_image_path = 4;
+  string profile = 5;
+  string email = 6;
+}
+
+message CreateUserResponse { User user = 1; }

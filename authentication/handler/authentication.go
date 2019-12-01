@@ -28,6 +28,11 @@ func (h *AuthenticationHandler) SignIn(ctx context.Context, req *pb.SignInMessag
 	return &pb.SignInMessageResponse{AccessToken: accessToken, RefreshToken: refreshToken}, nil
 }
 
+// CreateUser ... create user handler
+func (h *AuthenticationHandler) CreateUser(ctx context.Context, req *pb.CreateUserRequest) (*pb.CreateUserResponse, error) {
+	return &pb.CreateUserResponse{}, nil
+}
+
 // NewAuthenticationHandler ... get authentication handler
 func NewAuthenticationHandler(authenticationServive service.Authentication) pb.AuthenticationServer {
 	return &AuthenticationHandler{authenticationServive}

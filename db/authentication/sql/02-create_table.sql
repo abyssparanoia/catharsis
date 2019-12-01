@@ -4,6 +4,7 @@ create extension "uuid-ossp";
 
 create table users (
   id uuid DEFAULT uuid_generate_v4 () primary key,
+  password varchar NOT NULL,
   display_name varchar NOT NULL,
   icon_image_path varchar NOT NULL,
   background_image_path varchar NOT NULL,

@@ -25,6 +25,7 @@ import (
 // User is an object representing the database table.
 type User struct {
 	ID                  string      `boil:"id" json:"id" toml:"id" yaml:"id"`
+	Password            string      `boil:"password" json:"password" toml:"password" yaml:"password"`
 	DisplayName         string      `boil:"display_name" json:"display_name" toml:"display_name" yaml:"display_name"`
 	IconImagePath       string      `boil:"icon_image_path" json:"icon_image_path" toml:"icon_image_path" yaml:"icon_image_path"`
 	BackgroundImagePath string      `boil:"background_image_path" json:"background_image_path" toml:"background_image_path" yaml:"background_image_path"`
@@ -40,6 +41,7 @@ type User struct {
 
 var UserColumns = struct {
 	ID                  string
+	Password            string
 	DisplayName         string
 	IconImagePath       string
 	BackgroundImagePath string
@@ -50,6 +52,7 @@ var UserColumns = struct {
 	DeletedAt           string
 }{
 	ID:                  "id",
+	Password:            "password",
 	DisplayName:         "display_name",
 	IconImagePath:       "icon_image_path",
 	BackgroundImagePath: "background_image_path",
@@ -142,6 +145,7 @@ func (w whereHelpernull_Int64) GTE(x null.Int64) qm.QueryMod {
 
 var UserWhere = struct {
 	ID                  whereHelperstring
+	Password            whereHelperstring
 	DisplayName         whereHelperstring
 	IconImagePath       whereHelperstring
 	BackgroundImagePath whereHelperstring
@@ -152,6 +156,7 @@ var UserWhere = struct {
 	DeletedAt           whereHelpernull_Int64
 }{
 	ID:                  whereHelperstring{field: "\"users\".\"id\""},
+	Password:            whereHelperstring{field: "\"users\".\"password\""},
 	DisplayName:         whereHelperstring{field: "\"users\".\"display_name\""},
 	IconImagePath:       whereHelperstring{field: "\"users\".\"icon_image_path\""},
 	BackgroundImagePath: whereHelperstring{field: "\"users\".\"background_image_path\""},
@@ -179,8 +184,8 @@ func (*userR) NewStruct() *userR {
 type userL struct{}
 
 var (
-	userAllColumns            = []string{"id", "display_name", "icon_image_path", "background_image_path", "profile", "email", "created_at", "updated_at", "deleted_at"}
-	userColumnsWithoutDefault = []string{"display_name", "icon_image_path", "background_image_path", "profile", "email", "created_at", "updated_at", "deleted_at"}
+	userAllColumns            = []string{"id", "password", "display_name", "icon_image_path", "background_image_path", "profile", "email", "created_at", "updated_at", "deleted_at"}
+	userColumnsWithoutDefault = []string{"password", "display_name", "icon_image_path", "background_image_path", "profile", "email", "created_at", "updated_at", "deleted_at"}
 	userColumnsWithDefault    = []string{"id"}
 	userPrimaryKeyColumns     = []string{"id"}
 )

@@ -4,6 +4,8 @@ import (
 	"fmt"
 	"net"
 
+	"github.com/abyssparanoia/catharsis/pkg/psql"
+
 	"github.com/abyssparanoia/catharsis/pkg/jwtauth"
 
 	"github.com/abyssparanoia/catharsis/authentication/handler"
@@ -33,7 +35,11 @@ func newAuthenticationServer(logger *zap.Logger, env *environment) *grpc.Server 
 
 	jwtSignClient := jwtauth.NewSignClient(env.SignKeyPath)
 
-	userRepository := repository.NewUserMock()
+	psqlCfg := psql.NewConfig(env.DBHost, env.DBPort, env.DBUser, env.DBPassword, env.DBDatabase)
+
+	psqlClient := psql.NewClient(psqlCfg)
+
+	userRepository := repository.NewUser(psqlClient)
 
 	jwtSignService := jwtauth.NewSignService(jwtSignClient)
 

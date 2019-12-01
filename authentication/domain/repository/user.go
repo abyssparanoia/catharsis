@@ -10,11 +10,11 @@ import (
 type User interface {
 	Get(ctx context.Context, userID string) (*model.User, error)
 	Create(ctx context.Context, payload struct {
+		Password            string
 		DisplayName         string
 		IconImagePath       string
 		BackgroundImagePath string
-		Profile             string
-		Email               string
-		CreatedAt           int64
+		Profile             *string
+		Email               *string
 	}) (*model.User, error)
 }

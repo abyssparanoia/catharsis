@@ -1,19 +1,14 @@
 package entity
 
-import "github.com/abyssparanoia/catharsis/authentication/domain/model"
+import (
+	"github.com/abyssparanoia/catharsis/authentication/domain/model"
+	dbmodels "github.com/abyssparanoia/catharsis/pkg/dbmodels/authentication"
+	"github.com/volatiletech/null"
+)
 
 // User ... user entity
 type User struct {
-	ID                  string
-	Password            string
-	DisplayName         string
-	IconImagePath       string
-	BackgroundImagePath string
-	Profile             string
-	Email               string
-	CreatedAt           int64
-	UpdatedAt           int64
-	DeletedAt           int64
+	dbmodels.User
 }
 
 // BuildFromModel ... build model from entity
@@ -23,11 +18,17 @@ func (e *User) BuildFromModel(m *model.User) {
 	e.DisplayName = m.DisplayName
 	e.IconImagePath = m.IconImagePath
 	e.BackgroundImagePath = m.BackgroundImagePath
-	e.Profile = m.Profile
-	e.Email = m.Email
+	if m.Profile != nil {
+		e.Profile = null.StringFromPtr(m.Profile)
+	}
+	if m.Email != nil {
+		e.Email = null.StringFromPtr(m.Email)
+	}
 	e.CreatedAt = m.CreatedAt
 	e.UpdatedAt = m.UpdatedAt
-	e.DeletedAt = m.DeletedAt
+	if m.DeletedAt != nil {
+		e.DeletedAt = null.TimeFromPtr(m.DeletedAt)
+	}
 }
 
 // OutputModel ... output model from entity
@@ -38,10 +39,10 @@ func (e *User) OutputModel() *model.User {
 		DisplayName:         e.DisplayName,
 		IconImagePath:       e.IconImagePath,
 		BackgroundImagePath: e.BackgroundImagePath,
-		Profile:             e.Profile,
-		Email:               e.Email,
+		Profile:             e.Profile.Ptr(),
+		Email:               e.Email.Ptr(),
 		CreatedAt:           e.CreatedAt,
 		UpdatedAt:           e.UpdatedAt,
-		DeletedAt:           e.DeletedAt,
+		DeletedAt:           e.DeletedAt.Ptr(),
 	}
 }

@@ -3,6 +3,8 @@ package psql
 import (
 	"database/sql"
 	"fmt"
+
+	_ "github.com/lib/pq"
 )
 
 // NewClient ... get psql client

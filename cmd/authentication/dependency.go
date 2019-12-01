@@ -44,8 +44,9 @@ func newAuthenticationServer(logger *zap.Logger, env *environment) *grpc.Server 
 	jwtSignService := jwtauth.NewSignService(jwtSignClient)
 
 	authenticationService := service.NewAuthentication(userRepository, jwtSignService)
+	userService := service.NewUser(userRepository)
 
-	authenticationHandler := handler.NewAuthenticationHandler(authenticationService)
+	authenticationHandler := handler.NewAuthenticationHandler(authenticationService, userService)
 
 	opts := []grpc_recovery.Option{
 		grpc_recovery.WithRecoveryHandler(recoveryFuncFactory(logger)),

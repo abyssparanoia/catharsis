@@ -12,6 +12,7 @@ import (
 // AuthenticationHandler ... authentication handler struct
 type AuthenticationHandler struct {
 	authenticationServive service.Authentication
+	userService           service.User
 }
 
 // SignIn ... sign in handler
@@ -30,10 +31,39 @@ func (h *AuthenticationHandler) SignIn(ctx context.Context, req *pb.SignInMessag
 
 // CreateUser ... create user handler
 func (h *AuthenticationHandler) CreateUser(ctx context.Context, req *pb.CreateUserRequest) (*pb.CreateUserResponse, error) {
-	return &pb.CreateUserResponse{}, nil
+
+	user, err := h.userService.Create(ctx, struct {
+		Password            string
+		DisplayName         string
+		IconImagePath       string
+		BackgroundImagePath string
+		Profile             *string
+		Email               *string
+	}{
+		Password:            req.Password,
+		DisplayName:         req.DisplayName,
+		IconImagePath:       req.IconImagePath,
+		BackgroundImagePath: req.BackgroundImagePath,
+		Profile:             &req.Profile,
+		Email:               &req.Email,
+	})
+	if err != nil {
+		log.Errorf(ctx, "h.userService.Create", zap.Error(err))
+		return nil, err
+	}
+
+	return &pb.CreateUserResponse{User: &pb.User{
+		Id:                  user.ID,
+		DisplayName:         user.DisplayName,
+		IconImagePath:       user.IconImagePath,
+		BackgroundImagePath: user.BackgroundImagePath,
+		Profile:             *user.Profile,
+		Email:               *user.Email,
+	}}, nil
 }
 
 // NewAuthenticationHandler ... get authentication handler
-func NewAuthenticationHandler(authenticationServive service.Authentication) pb.AuthenticationServer {
-	return &AuthenticationHandler{authenticationServive}
+func NewAuthenticationHandler(authenticationServive service.Authentication,
+	userService service.User) pb.AuthenticationServer {
+	return &AuthenticationHandler{authenticationServive, userService}
 }

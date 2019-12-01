@@ -50,10 +50,16 @@ the boilerplate for monorepo application
 > docker-compose up -d
 ```
 
-- sign in grpcurl sample
+- example of sign in grpcurl
 
 ```bash
 > grpcurl -plaintext -d '{"user_id": "user_id", "password":"password"}' 127.0.0.1:50051 Authentication/SignIn
+```
+
+- example of create user in grpcurl
+
+```bash
+> grpcurl -plaintext -d '{"password":"password","display_name":"ゲストさn","icon_image_path":"icon_url","background_image_path":"background_url","profile":"text"}' localhost:50051 Authentication/CreateUser
 ```
 
 - example of bff server

@@ -1,3 +1,4 @@
 *-server
 secret/*
 .envrc
+db/*/data/*

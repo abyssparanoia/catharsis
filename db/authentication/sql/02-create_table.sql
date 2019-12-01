@@ -10,7 +10,7 @@ create table users (
   background_image_path varchar NOT NULL,
   profile varchar,
   email varchar,
-  created_at bigint NOT NULL,
-  updated_at bigint NOT NULL,
-  deleted_at bigint
+  created_at timestamp NOT NULL,
+  updated_at timestamp NOT NULL,
+  deleted_at timestamp
 );

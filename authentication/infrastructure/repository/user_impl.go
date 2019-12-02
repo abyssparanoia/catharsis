@@ -26,6 +26,18 @@ func (m *user) Get(ctx context.Context, userID string) (*model.User, error) {
 			Password: "password",
 		},
 	}
+
+	// queries := []qm.QueryMod{
+	// 	qm.Where(dbmodels.UserColumns.ID+"=?", userID),
+	// }
+
+	// dbUser, err := dbmodels.Users(queries...).One(ctx, m.db)
+	// if err != nil {
+	// 	log.Errorf(ctx, "dbmodels.Users(queries...).One(ctx, m.db)", zap.Error(err))
+	// 	return nil, err
+	// }
+	// user := entity.User{User: *dbUser}
+
 	return user.OutputModel(), nil
 }
 

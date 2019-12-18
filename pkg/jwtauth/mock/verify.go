@@ -11,31 +11,31 @@ import (
 	reflect "reflect"
 )
 
-// MockVerifyService is a mock of VerifyService interface
-type MockVerifyService struct {
+// MockJwtauthVerify is a mock of JwtauthVerify interface
+type MockJwtauthVerify struct {
 	ctrl     *gomock.Controller
-	recorder *MockVerifyServiceMockRecorder
+	recorder *MockJwtauthVerifyMockRecorder
 }
 
-// MockVerifyServiceMockRecorder is the mock recorder for MockVerifyService
-type MockVerifyServiceMockRecorder struct {
-	mock *MockVerifyService
+// MockJwtauthVerifyMockRecorder is the mock recorder for MockJwtauthVerify
+type MockJwtauthVerifyMockRecorder struct {
+	mock *MockJwtauthVerify
 }
 
-// NewMockVerifyService creates a new mock instance
-func NewMockVerifyService(ctrl *gomock.Controller) *MockVerifyService {
-	mock := &MockVerifyService{ctrl: ctrl}
-	mock.recorder = &MockVerifyServiceMockRecorder{mock}
+// NewMockJwtauthVerify creates a new mock instance
+func NewMockJwtauthVerify(ctrl *gomock.Controller) *MockJwtauthVerify {
+	mock := &MockJwtauthVerify{ctrl: ctrl}
+	mock.recorder = &MockJwtauthVerifyMockRecorder{mock}
 	return mock
 }
 
 // EXPECT returns an object that allows the caller to indicate expected use
-func (m *MockVerifyService) EXPECT() *MockVerifyServiceMockRecorder {
+func (m *MockJwtauthVerify) EXPECT() *MockJwtauthVerifyMockRecorder {
 	return m.recorder
 }
 
 // Validate mocks base method
-func (m *MockVerifyService) Validate(ctx context.Context, token string) (*jwtauth.Claims, error) {
+func (m *MockJwtauthVerify) Validate(ctx context.Context, token string) (*jwtauth.Claims, error) {
 	m.ctrl.T.Helper()
 	ret := m.ctrl.Call(m, "Validate", ctx, token)
 	ret0, _ := ret[0].(*jwtauth.Claims)
@@ -44,7 +44,7 @@ func (m *MockVerifyService) Validate(ctx context.Context, token string) (*jwtaut
 }
 
 // Validate indicates an expected call of Validate
-func (mr *MockVerifyServiceMockRecorder) Validate(ctx, token interface{}) *gomock.Call {
+func (mr *MockJwtauthVerifyMockRecorder) Validate(ctx, token interface{}) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "Validate", reflect.TypeOf((*MockVerifyService)(nil).Validate), ctx, token)
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "Validate", reflect.TypeOf((*MockJwtauthVerify)(nil).Validate), ctx, token)
 }

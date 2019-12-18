@@ -5,11 +5,11 @@ mockgen_task:
 	$(foreach file, $(REPOSITORY_LIST), $(call mockgen_repository,$(shell basename $(file))))
 
 define get_service_list
-	$(shell	find ./domain/service/ -maxdepth 1 -type f)
+	$(shell	find ./service/ -maxdepth 1 -type f ! -name "*_impl*.go")
 endef
 
 define mockgen_service
-	$(shell mockgen -source ./domain/service/$1 -destination ./domain/service/mock/$1)
+	$(shell mockgen -source ./service/$1 -destination ./service/mock/$1)
 endef
 
 define get_repository_list

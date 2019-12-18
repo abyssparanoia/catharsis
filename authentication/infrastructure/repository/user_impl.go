@@ -41,14 +41,7 @@ func (m *user) Get(ctx context.Context, userID string) (*model.User, error) {
 	return user.OutputModel(), nil
 }
 
-func (m *user) Create(ctx context.Context, payload struct {
-	Password            string
-	DisplayName         string
-	IconImagePath       string
-	BackgroundImagePath string
-	Profile             *string
-	Email               *string
-}) (*model.User, error) {
+func (m *user) Create(ctx context.Context, payload repository.UserCreatePayload) (*model.User, error) {
 
 	user := &entity.User{
 		dbmodels.User{

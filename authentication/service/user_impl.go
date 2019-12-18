@@ -3,7 +3,6 @@ package service
 import (
 	"context"
 
-	"github.com/abyssparanoia/catharsis/authentication/domain/model"
 	"github.com/abyssparanoia/catharsis/authentication/domain/repository"
 	"github.com/abyssparanoia/catharsis/pkg/log"
 	"go.uber.org/zap"
@@ -13,23 +12,9 @@ type user struct {
 	userRepository repository.User
 }
 
-func (s *user) Create(ctx context.Context, payload struct {
-	Password            string
-	DisplayName         string
-	IconImagePath       string
-	BackgroundImagePath string
-	Profile             *string
-	Email               *string
-}) (*model.User, error) {
+func (s *user) Create(ctx context.Context, payload UserCreatePayload) (*UserCreateResult, error) {
 
-	user, err := s.userRepository.Create(ctx, struct {
-		Password            string
-		DisplayName         string
-		IconImagePath       string
-		BackgroundImagePath string
-		Profile             *string
-		Email               *string
-	}{
+	user, err := s.userRepository.Create(ctx, repository.UserCreatePayload{
 		Password:            payload.Password,
 		DisplayName:         payload.DisplayName,
 		IconImagePath:       payload.IconImagePath,
@@ -41,8 +26,7 @@ func (s *user) Create(ctx context.Context, payload struct {
 		log.Errorf(ctx, "s.userRepository.Create", zap.Error(err))
 		return nil, err
 	}
-
-	return user, nil
+	return &UserCreateResult{User: user}, nil
 }
 
 // NewUser ... get user service

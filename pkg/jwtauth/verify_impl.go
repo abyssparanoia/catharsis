@@ -8,11 +8,11 @@ import (
 	"go.uber.org/zap"
 )
 
-type verifyService struct {
+type jwtauthVerify struct {
 	jwtVerifyClient *VerifyClient
 }
 
-func (s *verifyService) Validate(ctx context.Context, token string) (*Claims, error) {
+func (s *jwtauthVerify) Validate(ctx context.Context, token string) (*Claims, error) {
 
 	parser := new(jwt.Parser)
 
@@ -32,7 +32,7 @@ func (s *verifyService) Validate(ctx context.Context, token string) (*Claims, er
 
 }
 
-// NewVerifyService ... get new verify service
-func NewVerifyService(jwtVerifyClient *VerifyClient) VerifyService {
-	return &verifyService{jwtVerifyClient}
+// NewVerify ... get new verify service
+func NewVerify(jwtVerifyClient *VerifyClient) JwtauthVerify {
+	return &jwtauthVerify{jwtVerifyClient}
 }

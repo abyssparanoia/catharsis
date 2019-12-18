@@ -2,7 +2,7 @@ package jwtauth
 
 import "context"
 
-// SignService ... sign service interface
-type SignService interface {
+// JwtauthSign ... sign service interface
+type JwtauthSign interface {
 	GenerateToken(ctx context.Context, claims *Claims) (string, string, error)
 }

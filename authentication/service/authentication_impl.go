@@ -16,7 +16,7 @@ import (
 
 type authentication struct {
 	userRepository repository.User
-	jwtSignSvc     jwtauth.SignService
+	jwtauthSign    jwtauth.JwtauthSign
 }
 
 func (s *authentication) SignIn(ctx context.Context, userID string, password string) (accessToken string, refreshToken string, err error) {
@@ -37,16 +37,16 @@ func (s *authentication) SignIn(ctx context.Context, userID string, password str
 	claims := &jwtauth.Claims{}
 	claims.Set(userID)
 
-	accessToken, refreshToken, err = s.jwtSignSvc.GenerateToken(ctx, claims)
+	accessToken, refreshToken, err = s.jwtauthSign.GenerateToken(ctx, claims)
 	if err != nil {
-		log.Errorf(ctx, "s.jwtSignSvc.GenerateToken: %s", zap.Error(err))
-		return accessToken, refreshToken, status.Errorf(codes.Internal, "s.jwtSignSvc.GenerateToken:%s", err)
+		log.Errorf(ctx, "s.jwtauthSign.GenerateToken: %s", zap.Error(err))
+		return accessToken, refreshToken, status.Errorf(codes.Internal, "s.jwtauthSign.GenerateToken:%s", err)
 	}
 
 	return accessToken, refreshToken, nil
 }
 
 // NewAuthentication ... get authentication service
-func NewAuthentication(userRepository repository.User, jwtSignSvc jwtauth.SignService) Authentication {
-	return &authentication{userRepository, jwtSignSvc}
+func NewAuthentication(userRepository repository.User, jwtauthSign jwtauth.JwtauthSign) Authentication {
+	return &authentication{userRepository, jwtauthSign}
 }

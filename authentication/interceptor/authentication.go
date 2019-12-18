@@ -13,7 +13,7 @@ import (
 
 // Authentication ... authentication intercepter
 type Authentication struct {
-	verifyService jwtauth.VerifyService
+	jwtauthVerify jwtauth.JwtauthVerify
 }
 
 // Func ... intercepter function
@@ -24,9 +24,9 @@ func (i *Authentication) Func(ctx context.Context) (context.Context, error) {
 		return nil, status.Errorf(codes.Unauthenticated, "could not read auth token: %v", err)
 	}
 
-	claims, err := i.verifyService.Validate(ctx, token)
+	claims, err := i.jwtauthVerify.Validate(ctx, token)
 	if err != nil {
-		log.Errorf(ctx, "i.verifyService.Validate", zap.Error(err))
+		log.Errorf(ctx, "i.jwtauthVerify.Validate", zap.Error(err))
 		return nil, nil
 	}
 
@@ -36,6 +36,6 @@ func (i *Authentication) Func(ctx context.Context) (context.Context, error) {
 }
 
 // NewAuthentication ... get new authentication intercepter
-func NewAuthentication(verifyService jwtauth.VerifyService) *Authentication {
-	return &Authentication{verifyService}
+func NewAuthentication(jwtauthVerify jwtauth.JwtauthVerify) *Authentication {
+	return &Authentication{jwtauthVerify}
 }

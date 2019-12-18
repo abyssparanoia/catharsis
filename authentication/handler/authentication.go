@@ -32,14 +32,7 @@ func (h *AuthenticationHandler) SignIn(ctx context.Context, req *pb.SignInMessag
 // CreateUser ... create user handler
 func (h *AuthenticationHandler) CreateUser(ctx context.Context, req *pb.CreateUserRequest) (*pb.CreateUserResponse, error) {
 
-	user, err := h.userService.Create(ctx, struct {
-		Password            string
-		DisplayName         string
-		IconImagePath       string
-		BackgroundImagePath string
-		Profile             *string
-		Email               *string
-	}{
+	result, err := h.userService.Create(ctx, service.UserCreatePayload{
 		Password:            req.Password,
 		DisplayName:         req.DisplayName,
 		IconImagePath:       req.IconImagePath,
@@ -51,6 +44,8 @@ func (h *AuthenticationHandler) CreateUser(ctx context.Context, req *pb.CreateUs
 		log.Errorf(ctx, "h.userService.Create", zap.Error(err))
 		return nil, err
 	}
+
+	user := result.User
 
 	return &pb.CreateUserResponse{User: &pb.User{
 		Id:                  user.ID,

@@ -7,6 +7,7 @@ package mock_repository
 import (
 	context "context"
 	model "github.com/abyssparanoia/catharsis/authentication/domain/model"
+	repository "github.com/abyssparanoia/catharsis/authentication/domain/repository"
 	gomock "github.com/golang/mock/gomock"
 	reflect "reflect"
 )
@@ -47,4 +48,19 @@ func (m *MockUser) Get(ctx context.Context, userID string) (*model.User, error) 
 func (mr *MockUserMockRecorder) Get(ctx, userID interface{}) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "Get", reflect.TypeOf((*MockUser)(nil).Get), ctx, userID)
+}
+
+// Create mocks base method
+func (m *MockUser) Create(ctx context.Context, payload repository.UserCreatePayload) (*model.User, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "Create", ctx, payload)
+	ret0, _ := ret[0].(*model.User)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// Create indicates an expected call of Create
+func (mr *MockUserMockRecorder) Create(ctx, payload interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "Create", reflect.TypeOf((*MockUser)(nil).Create), ctx, payload)
 }

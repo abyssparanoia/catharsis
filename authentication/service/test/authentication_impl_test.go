@@ -3,6 +3,7 @@ package test
 import (
 	"context"
 	"testing"
+	"time"
 
 	"github.com/golang/mock/gomock"
 	"github.com/stretchr/testify/assert"
@@ -66,7 +67,7 @@ func Test_authentication_sign_in(t *testing.T) {
 					user: &model.User{
 						ID:        "user_id",
 						Password:  "password",
-						CreatedAt: 111111,
+						CreatedAt: time.Now(),
 					},
 					err: nil,
 				},
@@ -96,12 +97,12 @@ func Test_authentication_sign_in(t *testing.T) {
 				Get(gomock.Any(), tt.mock.getUser.userID).
 				Return(tt.mock.getUser.user, tt.mock.getUser.err)
 
-			jwtSignSvc := mock_jwt_auth.NewMockJwtauthSign(mc)
-			jwtSignSvc.EXPECT().
+			jwtauthSign := mock_jwt_auth.NewMockJwtauthSign(mc)
+			jwtauthSign.EXPECT().
 				GenerateToken(gomock.Any(), tt.mock.generateToken.claims).
 				Return(tt.mock.generateToken.accessToken, tt.mock.generateToken.refreshToken, tt.mock.generateToken.err)
 
-			s := service.NewAuthentication(userReposiotry, jwtSignSvc)
+			s := service.NewAuthentication(userReposiotry, jwtauthSign)
 
 			accessToken, refreshToken, err := s.SignIn(tt.args.ctx, tt.args.userID, tt.args.password)
 

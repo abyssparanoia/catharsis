@@ -9,11 +9,11 @@ import (
 	"go.uber.org/zap"
 )
 
-type signService struct {
+type jwtauthSign struct {
 	jwtSignCli *SignClient
 }
 
-func (s *signService) GenerateToken(ctx context.Context, claims *Claims) (string, string, error) {
+func (s *jwtauthSign) GenerateToken(ctx context.Context, claims *Claims) (string, string, error) {
 
 	claims.ExpiresAt = time.Now().Add(time.Hour * accessTokenExpiredHours).Unix()
 
@@ -38,7 +38,7 @@ func (s *signService) GenerateToken(ctx context.Context, claims *Claims) (string
 	return accessTokenString, refreshTokenString, nil
 }
 
-// NewSignService ... get new sign service
-func NewSignService(jwtSignCli *SignClient) SignService {
-	return &signService{jwtSignCli}
+// NewSign ... get new sign service
+func NewSign(jwtSignCli *SignClient) JwtauthSign {
+	return &jwtauthSign{jwtSignCli}
 }

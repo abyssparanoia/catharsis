@@ -11,31 +11,31 @@ import (
 	reflect "reflect"
 )
 
-// MockSignService is a mock of SignService interface
-type MockSignService struct {
+// MockJwtauthSign is a mock of JwtauthSign interface
+type MockJwtauthSign struct {
 	ctrl     *gomock.Controller
-	recorder *MockSignServiceMockRecorder
+	recorder *MockJwtauthSignMockRecorder
 }
 
-// MockSignServiceMockRecorder is the mock recorder for MockSignService
-type MockSignServiceMockRecorder struct {
-	mock *MockSignService
+// MockJwtauthSignMockRecorder is the mock recorder for MockJwtauthSign
+type MockJwtauthSignMockRecorder struct {
+	mock *MockJwtauthSign
 }
 
-// NewMockSignService creates a new mock instance
-func NewMockSignService(ctrl *gomock.Controller) *MockSignService {
-	mock := &MockSignService{ctrl: ctrl}
-	mock.recorder = &MockSignServiceMockRecorder{mock}
+// NewMockJwtauthSign creates a new mock instance
+func NewMockJwtauthSign(ctrl *gomock.Controller) *MockJwtauthSign {
+	mock := &MockJwtauthSign{ctrl: ctrl}
+	mock.recorder = &MockJwtauthSignMockRecorder{mock}
 	return mock
 }
 
 // EXPECT returns an object that allows the caller to indicate expected use
-func (m *MockSignService) EXPECT() *MockSignServiceMockRecorder {
+func (m *MockJwtauthSign) EXPECT() *MockJwtauthSignMockRecorder {
 	return m.recorder
 }
 
 // GenerateToken mocks base method
-func (m *MockSignService) GenerateToken(ctx context.Context, claims *jwtauth.Claims) (string, string, error) {
+func (m *MockJwtauthSign) GenerateToken(ctx context.Context, claims *jwtauth.Claims) (string, string, error) {
 	m.ctrl.T.Helper()
 	ret := m.ctrl.Call(m, "GenerateToken", ctx, claims)
 	ret0, _ := ret[0].(string)
@@ -45,7 +45,7 @@ func (m *MockSignService) GenerateToken(ctx context.Context, claims *jwtauth.Cla
 }
 
 // GenerateToken indicates an expected call of GenerateToken
-func (mr *MockSignServiceMockRecorder) GenerateToken(ctx, claims interface{}) *gomock.Call {
+func (mr *MockJwtauthSignMockRecorder) GenerateToken(ctx, claims interface{}) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GenerateToken", reflect.TypeOf((*MockSignService)(nil).GenerateToken), ctx, claims)
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GenerateToken", reflect.TypeOf((*MockJwtauthSign)(nil).GenerateToken), ctx, claims)
 }

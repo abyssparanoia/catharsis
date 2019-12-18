@@ -16,7 +16,7 @@ import (
 
 type authentication struct {
 	userRepository repository.User
-	jwtSignSvc     jwtauth.SignService
+	jwtSignSvc     jwtauth.JwtauthSign
 }
 
 func (s *authentication) SignIn(ctx context.Context, userID string, password string) (accessToken string, refreshToken string, err error) {
@@ -47,6 +47,6 @@ func (s *authentication) SignIn(ctx context.Context, userID string, password str
 }
 
 // NewAuthentication ... get authentication service
-func NewAuthentication(userRepository repository.User, jwtSignSvc jwtauth.SignService) Authentication {
+func NewAuthentication(userRepository repository.User, jwtSignSvc jwtauth.JwtauthSign) Authentication {
 	return &authentication{userRepository, jwtSignSvc}
 }

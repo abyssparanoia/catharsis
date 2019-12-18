@@ -96,7 +96,7 @@ func Test_authentication_sign_in(t *testing.T) {
 				Get(gomock.Any(), tt.mock.getUser.userID).
 				Return(tt.mock.getUser.user, tt.mock.getUser.err)
 
-			jwtSignSvc := mock_jwt_auth.NewMockSignService(mc)
+			jwtSignSvc := mock_jwt_auth.NewMockJwtauthSign(mc)
 			jwtSignSvc.EXPECT().
 				GenerateToken(gomock.Any(), tt.mock.generateToken.claims).
 				Return(tt.mock.generateToken.accessToken, tt.mock.generateToken.refreshToken, tt.mock.generateToken.err)

@@ -41,9 +41,9 @@ func newAuthenticationServer(logger *zap.Logger, env *environment) *grpc.Server 
 
 	userRepository := repository.NewUser(psqlClient)
 
-	jwtSignService := jwtauth.NewSignService(jwtSignClient)
+	jwtJwtauthSign := jwtauth.NewSign(jwtSignClient)
 
-	authenticationService := service.NewAuthentication(userRepository, jwtSignService)
+	authenticationService := service.NewAuthentication(userRepository, jwtJwtauthSign)
 	userService := service.NewUser(userRepository)
 
 	authenticationHandler := handler.NewAuthenticationHandler(authenticationService, userService)

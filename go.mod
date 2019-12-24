@@ -3,12 +3,11 @@ module github.com/abyssparanoia/catharsis
 go 1.13
 
 require (
+	firebase.google.com/go v3.11.1+incompatible
 	github.com/caarlos0/env/v6 v6.1.0
 	github.com/dgrijalva/jwt-go v3.2.0+incompatible
 	github.com/friendsofgo/errors v0.9.2
 	github.com/go-chi/chi v4.0.2+incompatible
-	github.com/go-playground/universal-translator v0.17.0 // indirect
-	github.com/go-sql-driver/mysql v1.4.1 // indirect
 	github.com/gofrs/uuid v3.2.0+incompatible // indirect
 	github.com/golang/mock v1.3.1
 	github.com/golang/protobuf v1.3.2
@@ -26,7 +25,6 @@ require (
 	github.com/volatiletech/sqlboiler v3.6.1+incompatible
 	go.uber.org/zap v1.13.0
 	golang.org/x/text v0.3.2
-	google.golang.org/appengine v1.6.5
 	google.golang.org/grpc v1.26.0
 	gopkg.in/go-playground/assert.v1 v1.2.1
 	gopkg.in/go-playground/validator.v9 v9.30.2

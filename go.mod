@@ -9,7 +9,7 @@ require (
 	github.com/friendsofgo/errors v0.9.2
 	github.com/go-chi/chi v4.0.3+incompatible
 	github.com/gofrs/uuid v3.2.0+incompatible // indirect
-	github.com/golang/mock v1.3.1
+	github.com/golang/mock v1.4.0
 	github.com/golang/protobuf v1.3.2
 	github.com/grpc-ecosystem/go-grpc-middleware v1.1.0
 	github.com/kat-co/vala v0.0.0-20170210184112-42e1d8b61f12

@@ -3,7 +3,7 @@ module github.com/abyssparanoia/catharsis
 go 1.13
 
 require (
-	firebase.google.com/go v3.12.1+incompatible
+	firebase.google.com/go v3.13.0+incompatible
 	github.com/caarlos0/env/v6 v6.2.2
 	github.com/dgrijalva/jwt-go v3.2.0+incompatible
 	github.com/friendsofgo/errors v0.9.2

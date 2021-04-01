@@ -27,7 +27,7 @@ require (
 	github.com/volatiletech/sqlboiler/v4 v4.4.0
 	go.opencensus.io v0.22.3 // indirect
 	go.uber.org/zap v1.16.0
-	golang.org/x/text v0.3.5
+	golang.org/x/text v0.3.6
 	google.golang.org/api v0.17.0 // indirect
 	google.golang.org/grpc v1.36.0
 	gopkg.in/go-playground/assert.v2 v2.0.1

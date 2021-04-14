@@ -16,7 +16,7 @@ require (
 	github.com/grpc-ecosystem/go-grpc-middleware v1.2.2
 	github.com/kat-co/vala v0.0.0-20170210184112-42e1d8b61f12
 	github.com/leodido/go-urn v1.2.0 // indirect
-	github.com/lib/pq v1.9.0
+	github.com/lib/pq v1.10.0
 	github.com/rs/zerolog v1.20.0
 	github.com/spf13/cobra v0.0.5 // indirect
 	github.com/spf13/viper v1.7.1

@@ -15,7 +15,7 @@ services:
     command: ash -c "realize start"
 
   authentication-db:
-    image: postgres:10-alpine
+    image: postgres:13-alpine
     restart: always
     environment:
       POSTGRES_PASSWORD: postgres

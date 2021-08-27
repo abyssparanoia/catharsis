@@ -19,7 +19,7 @@ require (
 	github.com/lib/pq v1.10.1
 	github.com/rs/zerolog v1.21.0
 	github.com/spf13/cobra v0.0.5 // indirect
-	github.com/spf13/viper v1.7.1
+	github.com/spf13/viper v1.8.1
 	github.com/stretchr/testify v1.7.0
 	github.com/unrolled/render v1.1.0
 	github.com/volatiletech/inflect v0.0.0-20170731032912-e7201282ae8d // indirect

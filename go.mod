@@ -4,7 +4,7 @@ go 1.13
 
 require (
 	firebase.google.com/go/v4 v4.6.0
-	github.com/caarlos0/env/v6 v6.6.2
+	github.com/caarlos0/env/v6 v6.7.1
 	github.com/dgrijalva/jwt-go v3.2.0+incompatible
 	github.com/friendsofgo/errors v0.9.2
 	github.com/go-chi/chi/v5 v5.0.4

@@ -24,7 +24,7 @@ require (
 	github.com/unrolled/render v1.4.0
 	github.com/volatiletech/inflect v0.0.0-20170731032912-e7201282ae8d // indirect
 	github.com/volatiletech/null v8.1.2+incompatible
-	github.com/volatiletech/sqlboiler/v4 v4.7.1
+	github.com/volatiletech/sqlboiler/v4 v4.8.3
 	go.opencensus.io v0.22.3 // indirect
 	go.uber.org/zap v1.19.1
 	golang.org/x/text v0.3.7

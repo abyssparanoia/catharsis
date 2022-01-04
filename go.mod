@@ -26,7 +26,7 @@ require (
 	github.com/volatiletech/null/v9 v9.0.0
 	github.com/volatiletech/sqlboiler/v4 v4.8.3
 	go.opencensus.io v0.22.3 // indirect
-	go.uber.org/zap v1.19.1
+	go.uber.org/zap v1.20.0
 	golang.org/x/text v0.3.7
 	google.golang.org/api v0.17.0 // indirect
 	google.golang.org/grpc v1.43.0

@@ -29,7 +29,7 @@ require (
 	go.uber.org/zap v1.20.0
 	golang.org/x/text v0.3.7
 	google.golang.org/api v0.17.0 // indirect
-	google.golang.org/grpc v1.43.0
+	google.golang.org/grpc v1.53.0
 	gopkg.in/go-playground/assert.v2 v2.0.1
 	gopkg.in/go-playground/validator.v10 v10.10.0
 )

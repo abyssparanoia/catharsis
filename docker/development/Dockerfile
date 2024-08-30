@@ -1,4 +1,4 @@
-FROM golang:1.17-alpine
+FROM golang:1.23-alpine
 
 WORKDIR /go/src/github.com/abyssparanoia/catharsis/
 COPY . .
